@@ -66,7 +66,10 @@ section { position: relative; }
 @keyframes gemPulse { 50% { scale: 1.14; filter: drop-shadow(0 0 22px rgba(255, 79, 163, 1)) brightness(1.1); } }
 
 /* ---------- 1. Создание персонажа ---------- */
-.cas { background: var(--cas); padding-bottom: 6px; }
+.cas {
+  background: linear-gradient(to bottom, rgba(238,244,251,0) calc(100% - 170px), var(--paper) 100%), var(--cas);
+  padding-bottom: 120px;
+}
 .stage { position: relative; width: 100%; aspect-ratio: 720 / 1420; }
 .stage__video {
   position: absolute; left: 0; bottom: 0; width: 100%; aspect-ratio: 720 / 1296;
@@ -148,12 +151,12 @@ section { position: relative; }
 .date__cake { position: relative; width: 100%; max-width: 420px; margin: 0 auto; }
 .date__cake img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; }
 .date__text {
-  position: absolute; left: 22%; right: 22%; top: 18%; height: 30%;
+  position: absolute; left: 20%; right: 20%; top: 23%; height: 28%;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  color: var(--pink-deep); text-align: center;
+  color: #d97a96; text-align: center; font-family: 'Great Vibes', var(--script); line-height: 1;
 }
-.date__day { font-family: var(--script); font-size: clamp(38px, 12vw, 54px); line-height: 1; }
-.date__time { font-weight: 700; font-size: clamp(20px, 6vw, 26px); letter-spacing: 2px; margin-top: 4px; }
+.date__day { font-size: clamp(44px, 13.5vw, 62px); }
+.date__time { font-size: clamp(38px, 11.5vw, 54px); margin-top: 2px; }
 
 /* ---------- 5. Место ---------- */
 .place { padding: 20px 24px 44px; text-align: center; }
@@ -211,7 +214,10 @@ section { position: relative; }
 .dialog__send:disabled { opacity: .6; cursor: progress; }
 
 /* ---------- 7. Финал ---------- */
-.final { background: var(--cas); padding: 40px 0 34px; text-align: center; }
+.final {
+  background: linear-gradient(to bottom, var(--paper) 0, rgba(238,244,251,0) 190px), var(--cas);
+  padding: 170px 0 34px; text-align: center;
+}
 .title--final { color: #fff; text-shadow: 0 2px 10px rgba(20,40,110,.35); }
 .stage--final { width: 100%; margin: -10px auto 0; }
 .plumbob--final { left: 55%; top: 4.2%; width: 9.5%; margin-left: -4.75%; }

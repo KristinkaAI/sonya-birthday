@@ -1,5 +1,5 @@
 // Анкета гостя → Google Apps Script → Гугл-таблица.
-import { validateRsvp } from './logic.js?v=20261009173126';
+import { validateRsvp } from './logic.js?v=20261009174135';
 
 export function initRsvp(url) {
   const form = document.getElementById('rsvpForm');
