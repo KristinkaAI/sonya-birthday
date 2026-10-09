@@ -1,10 +1,10 @@
-import { CONFIG } from './config.js';
-import { startLoader } from './loader.js';
-import { initMusic } from './music.js';
-import { playScene } from './scene.js';
-import { initRsvp } from './rsvp.js';
-import { initFinal } from './final.js';
-import { buildPlumbobs } from './plumbob.js';
+import { CONFIG } from './config.js?v=20261009173126';
+import { startLoader } from './loader.js?v=20261009173126';
+import { initMusic } from './music.js?v=20261009173126';
+import { playScene } from './scene.js?v=20261009173126';
+import { initRsvp } from './rsvp.js?v=20261009173126';
+import { initFinal } from './final.js?v=20261009173126';
+import { buildPlumbobs } from './plumbob.js?v=20261009173126';
 
 const $ = id => document.getElementById(id);
 

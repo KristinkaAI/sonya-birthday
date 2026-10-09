@@ -1,5 +1,5 @@
 // Финал: обратный отсчёт и полоски потребностей.
-import { countdown, needsLevel, pad2 } from './logic.js';
+import { countdown, needsLevel, pad2 } from './logic.js?v=20261009173126';
 
 export function initFinal(partyISO) {
   const target = Date.parse(partyISO);
