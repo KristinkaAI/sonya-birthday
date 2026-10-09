@@ -1,53 +1,75 @@
-// Фоновая музыка и кнопка-нотка. Если файла нет — кнопка не показывается.
-const NORMAL = 0.6, QUIET = 0.12;
+// Фоновая музыка. Телефоны не дают включить звук до первого касания,
+// поэтому музыка грузится сразу, а стартует по первому касанию в любом месте
+// (или по нотке) — с плавным нарастанием. Громкость управляется через Web Audio:
+// на iPhone свойство audio.volume не работает.
+const NORMAL = 0.6, QUIET = 0.12, FADE_IN = 3;
 
 export function initMusic(src) {
   const button = document.getElementById('music');
-  const audio = new Audio();
+  const audio = new Audio(src);
   audio.loop = true;
   audio.preload = 'auto';
-  audio.volume = NORMAL;
-  let available = false;
-  let wantOn = true;
-  let fadeTimer = null;
 
-  const fadeTo = target => {
-    clearInterval(fadeTimer);
-    fadeTimer = setInterval(() => {
-      const d = target - audio.volume;
-      if (Math.abs(d) < 0.03) { audio.volume = target; clearInterval(fadeTimer); return; }
-      audio.volume += d * 0.25;
-    }, 50);
+  let ctx = null, gain = null;
+  let started = false;   // музыка запущена хотя бы раз
+  let wantOn = true;     // пользователь не выключал нотку
+  let ducked = false;
+
+  audio.addEventListener('error', () => { button.hidden = true; });
+
+  const target = () => (ducked ? QUIET : NORMAL);
+  const ramp = (value, seconds) => {
+    if (!gain) { audio.volume = value; return; }
+    const t = ctx.currentTime;
+    gain.gain.cancelScheduledValues(t);
+    gain.gain.setValueAtTime(gain.gain.value, t);
+    gain.gain.linearRampToValueAtTime(value, t + seconds);
   };
-
-  const ready = fetch(src, { method: 'HEAD' })
-    .then(r => { available = r.ok; })
-    .catch(() => { available = false; })
-    .then(() => {
-      if (!available) return;
-      audio.src = src;
-      button.hidden = false;
-    });
 
   const paint = () => {
+    button.classList.toggle('waiting', !started && wantOn);
     button.classList.toggle('off', !wantOn);
-    button.classList.toggle('playing', wantOn && !audio.paused);
+    button.classList.toggle('playing', started && wantOn && !audio.paused);
   };
 
-  button.addEventListener('click', () => {
+  // вызывать только внутри жеста пользователя
+  const start = () => {
+    if (started || !wantOn) return;
+    started = true;
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) {
+        ctx = new AC();
+        gain = ctx.createGain();
+        gain.gain.value = 0;
+        ctx.createMediaElementSource(audio).connect(gain).connect(ctx.destination);
+        ctx.resume();
+      }
+    } catch { ctx = null; gain = null; }
+    if (!gain) audio.volume = 0.05;
+    audio.play().then(() => ramp(target(), FADE_IN)).catch(() => { started = false; paint(); });
+    paint();
+  };
+
+  // Первое касание в любом месте страницы
+  const onFirstGesture = () => start();
+  ['pointerup', 'touchend', 'keydown'].forEach(e =>
+    window.addEventListener(e, onFirstGesture, { capture: true, passive: true }));
+
+  button.addEventListener('click', e => {
+    e.stopPropagation();
+    if (!started) { wantOn = true; start(); return; }
     wantOn = !wantOn;
-    if (wantOn) audio.play().catch(() => {}); else audio.pause();
+    if (wantOn) { ctx?.resume(); audio.play().catch(() => {}); ramp(target(), 0.6); }
+    else audio.pause();
     paint();
   });
   audio.addEventListener('play', paint);
   audio.addEventListener('pause', paint);
+  paint();
 
   return {
-    // вызывать внутри жеста пользователя
-    start() {
-      if (available && wantOn) audio.play().catch(() => {});
-      else ready.then(() => { if (available && wantOn) audio.play().catch(() => {}); });
-    },
-    duck(on) { if (available) fadeTo(on ? QUIET : NORMAL); },
+    start,
+    duck(on) { ducked = on; if (started && wantOn) ramp(target(), 0.8); },
   };
 }

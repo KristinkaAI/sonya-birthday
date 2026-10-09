@@ -42,9 +42,8 @@ section { position: relative; }
 }
 
 /* ---------- Кристалл ---------- */
-.plumbob { position: absolute; pointer-events: none; filter: drop-shadow(0 0 10px rgba(61, 220, 74, .7)); }
-.plumbob svg { width: 100%; height: 100%; display: block; }
-.plumbob--float { animation: bob 2.4s ease-in-out infinite, spinY 3.6s linear infinite; }
+.plumbob { position: absolute; pointer-events: none; }
+.plumbob--float { animation: bob 2.4s ease-in-out infinite; }
 @keyframes bob { 50% { translate: 0 -6px; } }
 @keyframes spinY { from { transform: rotateY(0); } to { transform: rotateY(360deg); } }
 
@@ -57,8 +56,7 @@ section { position: relative; }
   transition: opacity .6s ease;
 }
 .loader.hide { opacity: 0; pointer-events: none; }
-.loader__plumbob { width: 70px; height: 140px; animation: spinY 2.2s linear infinite; filter: drop-shadow(0 0 18px rgba(255, 79, 163, .8)); }
-.loader__plumbob svg { width: 100%; height: 100%; }
+.loader__plumbob { position: relative; width: 74px; animation: bob 2.4s ease-in-out infinite; }
 .loader__phrase { margin: 0; font-weight: 500; font-size: 17px; min-height: 1.4em; text-shadow: 0 1px 6px rgba(0,0,0,.25); }
 .loader__bar { width: min(260px, 70vw); height: 12px; border-radius: 99px; background: rgba(255,255,255,.3); box-shadow: inset 0 1px 3px rgba(0,0,0,.2); overflow: hidden; }
 .loader__fill { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #b8ff9c, var(--green)); transition: width .3s; }
@@ -80,7 +78,7 @@ section { position: relative; }
           mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
 }
 .stage__video.on { opacity: 1; }
-#casPlumbob { left: 50%; top: 2.2%; width: 7%; aspect-ratio: 1 / 2; margin-left: -3.5%; opacity: 0; transition: opacity .6s; }
+#casPlumbob { left: 50%; top: 2.6%; width: 9.5%; margin-left: -4.75%; opacity: 0; transition: opacity .6s; }
 #casPlumbob.on { opacity: 1; }
 .sparkle { position: absolute; right: 7%; bottom: 7%; color: rgba(255,255,255,.75); font-size: 26px; animation: twinkle 2s ease-in-out infinite; }
 @keyframes twinkle { 50% { opacity: .3; transform: scale(.7) rotate(20deg); } }
@@ -118,7 +116,7 @@ section { position: relative; }
 
 /* ---------- 2. Обложка ---------- */
 .cover { background: var(--teal); padding: 28px 0 0; min-height: 640px; text-align: center; overflow: hidden; }
-.cover__script { position: relative; z-index: 2; font-family: var(--script); color: #fff; font-size: 44px; text-shadow: 0 2px 10px rgba(0,0,0,.2); }
+.cover__script { position: relative; z-index: 2; text-align: left; padding-left: 13%; font-family: var(--script); color: #fff; font-size: 44px; text-shadow: 0 2px 10px rgba(0,0,0,.2); }
 .cover__age {
   position: relative; z-index: 1; margin-top: -18px;
   font-weight: 800; font-size: clamp(180px, 56vw, 270px); line-height: .85; letter-spacing: .18em; padding-left: .18em;
@@ -126,7 +124,7 @@ section { position: relative; }
 }
 .cover__sim { position: relative; z-index: 2; width: 40%; margin: -38% auto 0; }
 .cover__sim img { width: 100%; height: auto; display: block; filter: drop-shadow(0 18px 18px rgba(0, 40, 80, .25)); }
-.cover__sim .plumbob { position: absolute; width: 12%; aspect-ratio: 1/2; left: 57%; top: -7%; animation: bob 2.4s ease-in-out infinite, spinY 3.6s linear infinite; }
+.cover__sim .plumbob { position: absolute; width: 14%; left: 53%; top: -10.5%; animation: bob 2.4s ease-in-out infinite; }
 
 /* ---------- 3. Приглашение ---------- */
 .invite { padding: 48px 28px 70px; text-align: center; font-size: 16px; line-height: 1.55; }
@@ -208,7 +206,7 @@ section { position: relative; }
 .final { background: var(--cas); padding: 40px 0 34px; text-align: center; }
 .title--final { color: #fff; text-shadow: 0 2px 10px rgba(20,40,110,.35); }
 .stage--final { width: 100%; margin: -10px auto 0; }
-.plumbob--final { left: 55%; top: 3.5%; width: 7%; aspect-ratio: 1/2; margin-left: -3.5%; }
+.plumbob--final { left: 55%; top: 4.2%; width: 9.5%; margin-left: -4.75%; }
 .countdown { display: flex; justify-content: center; gap: 10px; margin: 6px 0 0; }
 .countdown div { width: 70px; }
 .countdown b { display: block; font-weight: 800; font-size: 38px; line-height: 1; color: #fff; text-shadow: 0 2px 8px rgba(20,40,110,.35); }
@@ -222,12 +220,19 @@ section { position: relative; }
 
 /* ---------- Музыка ---------- */
 .music {
-  position: fixed; z-index: 40; right: max(14px, calc(50vw - 240px + 14px)); bottom: 16px;
+  position: fixed; z-index: 70; right: max(14px, calc(50vw - 240px + 14px)); bottom: 16px;
   width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer;
   font-size: 26px; color: #fff; background: linear-gradient(180deg, #ff8cc6, var(--pink-deep));
   box-shadow: 0 6px 18px rgba(224, 35, 127, .45);
 }
 .music.off { opacity: .55; text-decoration: line-through; }
+.music.waiting { animation: pulse 1.4s ease-in-out infinite; }
+.music__hint {
+  position: absolute; right: 60px; top: 50%; translate: 0 -50%; white-space: nowrap;
+  font: 600 13px var(--sans); color: var(--navy); background: #fff; padding: 7px 12px; border-radius: 99px;
+  box-shadow: 0 4px 14px rgba(27,42,107,.2); text-decoration: none;
+}
+.music:not(.waiting) .music__hint { display: none; }
 .music.playing { animation: twinkle 2.4s ease-in-out infinite; }
 
 /* ---------- Желание исполнено ---------- */
@@ -239,7 +244,7 @@ section { position: relative; }
   box-shadow: 0 20px 50px rgba(0,0,0,.35); animation: pop .45s cubic-bezier(.2,1.6,.4,1);
 }
 @keyframes pop { from { transform: scale(.6); opacity: 0; } }
-.wish__plumbob { width: 30px; height: 60px; animation: spinY 1.8s linear infinite; filter: drop-shadow(0 0 10px rgba(61,220,74,.9)); }
+.wish__plumbob { position: relative; width: 30px; margin: 0 auto; }
 .wish__title { font-weight: 800; font-size: 24px; margin: 8px 0 4px; }
 .wish__text { margin: 0 0 8px; opacity: .9; }
 .wish__points { font-weight: 800; font-size: 28px; color: #9dff8f; margin: 0 0 14px; }
@@ -254,3 +259,29 @@ section { position: relative; }
 }
 
 [hidden] { display: none !important; }
+
+/* ---------- Объёмный кристалл ---------- */
+.pb3d { container-type: inline-size; aspect-ratio: 1 / 2; perspective: 600px;
+  filter: drop-shadow(0 0 8px var(--pb-glow)); }
+.pb3d--green { --pb-light: #c6ff9e; --pb-mid: #3ddc4a; --pb-dark: #0f7a1f; --pb-glow: rgba(61, 220, 74, .75); }
+.pb3d--pink  { --pb-light: #ffd0ea; --pb-mid: #ff4fa3; --pb-dark: #9c004f; --pb-glow: rgba(255, 79, 163, .8); }
+.pb3d__spin { position: absolute; inset: 0; transform-style: preserve-3d; animation: pbSpin 4.5s linear infinite; }
+@keyframes pbSpin { from { transform: rotateY(0); } to { transform: rotateY(360deg); } }
+/* ширина w = 100cqw, высота 200cqw; радиус описанной окружности 0.5w,
+   апофема 0.433w, высота пирамиды 1w, наклонная высота грани 1.0897w, угол наклона 23.41° */
+.pb3d__f { position: absolute; left: 25cqw; width: 50cqw; height: 108.97cqw; backface-visibility: visible; }
+.pb3d__f--top {
+  top: -8.97cqw; transform-origin: 50% 100%;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  transform: rotateY(calc(var(--k) * 60deg)) translateZ(43.3cqw) rotateX(23.41deg);
+}
+.pb3d__f--bot {
+  top: 100cqw; transform-origin: 50% 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform: rotateY(calc(var(--k) * 60deg)) translateZ(43.3cqw) rotateX(-23.41deg);
+}
+.pb3d__f--top.pb3d__f--a { background: linear-gradient(to top, var(--pb-mid), var(--pb-light)); }
+.pb3d__f--top.pb3d__f--b { background: linear-gradient(to top, var(--pb-dark), var(--pb-mid)); }
+.pb3d__f--bot.pb3d__f--a { background: linear-gradient(to bottom, var(--pb-mid), var(--pb-dark)); }
+.pb3d__f--bot.pb3d__f--b { background: linear-gradient(to bottom, var(--pb-dark), #053d0f); }
+.pb3d--pink .pb3d__f--bot.pb3d__f--b { background: linear-gradient(to bottom, var(--pb-dark), #4a0026); }

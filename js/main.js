@@ -4,8 +4,11 @@ import { initMusic } from './music.js';
 import { playScene } from './scene.js';
 import { initRsvp } from './rsvp.js';
 import { initFinal } from './final.js';
+import { buildPlumbobs } from './plumbob.js';
 
 const $ = id => document.getElementById(id);
+
+buildPlumbobs();
 
 // Тексты из конфига
 $('coverAge').textContent = CONFIG.age;
