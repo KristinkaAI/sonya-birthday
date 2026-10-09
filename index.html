@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261009175226">
+  <link rel="stylesheet" href="css/style.css?v=20261009180150">
 </head>
 <body>
 
@@ -54,8 +54,10 @@
   <!-- 1. Создание персонажа -->
   <section id="cas" class="cas">
     <div class="stage" id="casStage">
-      <video class="stage__video" id="casVideoA" playsinline preload="auto"></video>
-      <video class="stage__video" id="casVideoB" playsinline preload="auto" muted></video>
+      <div class="vfade">
+        <video class="stage__video" id="casVideoA" playsinline preload="auto"></video>
+        <video class="stage__video" id="casVideoB" playsinline preload="auto" muted></video>
+      </div>
       <div class="plumbob plumbob--float pb3d pb3d--green" id="casPlumbob"></div>
       <div class="swirl" id="casSwirl" aria-hidden="true"></div>
       <canvas class="confetti" id="casConfetti" aria-hidden="true"></canvas>
@@ -159,7 +161,7 @@
       <svg class="heart heart--inline"><use href="#heart"/></svg>
     </h2>
     <div class="stage stage--final">
-      <video class="stage__video on" id="finalVideo" playsinline muted loop preload="auto"></video>
+      <div class="vfade"><video class="stage__video on" id="finalVideo" playsinline muted loop preload="auto"></video></div>
       <div class="plumbob plumbob--float plumbob--final pb3d pb3d--green"></div>
     </div>
     <div class="countdown" id="countdown">
@@ -190,6 +192,6 @@
   </div>
 </div>
 
-<script type="module" src="js/main.js?v=20261009175226"></script>
+<script type="module" src="js/main.js?v=20261009180150"></script>
 </body>
 </html>
