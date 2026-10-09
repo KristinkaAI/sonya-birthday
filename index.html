@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Соне 29 — приглашение</title>
+  <meta name="description" content="Приглашение на день рождения Сони, 4 ноября">
+  <meta property="og:title" content="Соне 29 — приглашение">
+  <meta property="og:description" content="4 ноября, 17:00 · Black Pine">
+  <meta property="og:image" content="media/poster-d.jpg">
+  <meta name="theme-color" content="#6f9ec4">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 80'%3E%3Cpolygon points='20,0 2,40 20,80 38,40' fill='%233ddc4a'/%3E%3Cpolygon points='20,0 38,40 20,80' fill='%23127a22'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Кристалл (используется много раз) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gGreenL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b8ff9c"/><stop offset="1" stop-color="#2fbf3b"/></linearGradient>
+    <linearGradient id="gGreenR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3ddc4a"/><stop offset="1" stop-color="#127a22"/></linearGradient>
+    <linearGradient id="gPinkL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb3dc"/><stop offset="1" stop-color="#ff2f93"/></linearGradient>
+    <linearGradient id="gPinkR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4fa3"/><stop offset="1" stop-color="#a3005a"/></linearGradient>
+    <symbol id="plumbob-green" viewBox="0 0 40 80">
+      <polygon points="20,0 2,40 20,34" fill="url(#gGreenL)"/><polygon points="20,0 38,40 20,34" fill="url(#gGreenR)"/>
+      <polygon points="2,40 20,34 20,80" fill="#28b236"/><polygon points="38,40 20,34 20,80" fill="#0f6a1c"/>
+      <polygon points="20,0 11,20 20,17" fill="#fff" opacity=".45"/>
+    </symbol>
+    <symbol id="plumbob-pink" viewBox="0 0 40 80">
+      <polygon points="20,0 2,40 20,34" fill="url(#gPinkL)"/><polygon points="20,0 38,40 20,34" fill="url(#gPinkR)"/>
+      <polygon points="2,40 20,34 20,80" fill="#e01f80"/><polygon points="38,40 20,34 20,80" fill="#8a004b"/>
+      <polygon points="20,0 11,20 20,17" fill="#fff" opacity=".5"/>
+    </symbol>
+    <symbol id="heart" viewBox="0 0 48 44">
+      <path d="M24 40C14 32 4 25 4 14 4 8 9 4 14.5 4c4 0 7.5 2.4 9.5 6 2-3.6 5.5-6 9.5-6C39 4 44 8 44 14c0 11-10 18-20 26z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- 0. Загрузка -->
+<div id="loader" class="loader">
+  <div class="loader__plumbob"><svg viewBox="0 0 40 80"><use href="#plumbob-pink"/></svg></div>
+  <p class="loader__phrase" id="loaderPhrase">Загрузка…</p>
+  <div class="loader__bar"><div class="loader__fill" id="loaderFill"></div></div>
+  <button class="loader__open" id="loaderOpen" hidden>Нажмите, чтобы открыть</button>
+</div>
+
+<main class="column">
+
+  <!-- 1. Создание персонажа -->
+  <section id="cas" class="cas">
+    <div class="stage" id="casStage">
+      <video class="stage__video" id="casVideoA" playsinline preload="auto"></video>
+      <video class="stage__video" id="casVideoB" playsinline preload="auto" muted></video>
+      <div class="plumbob plumbob--float" id="casPlumbob"><svg viewBox="0 0 40 80"><use href="#plumbob-green"/></svg></div>
+      <div class="swirl" id="casSwirl" aria-hidden="true"></div>
+      <canvas class="confetti" id="casConfetti" aria-hidden="true"></canvas>
+      <div class="sparkle" aria-hidden="true">✦</div>
+    </div>
+    <div class="scroll-hint" id="scrollHint">листайте вниз<span>⌄</span></div>
+  </section>
+
+  <!-- 2. Обложка -->
+  <section id="cover" class="cover reveal">
+    <div class="cover__script">Мои</div>
+    <div class="cover__age" id="coverAge">29</div>
+    <div class="cover__sim">
+      <div class="plumbob plumbob--small"><svg viewBox="0 0 40 80"><use href="#plumbob-green"/></svg></div>
+      <img src="media/cover.webp" alt="Соня с праздничным тортом" width="900" height="2678">
+    </div>
+  </section>
+
+  <!-- 3. Приглашение -->
+  <section id="invite" class="invite reveal">
+    <h2 class="title">Дорогие друзья!</h2>
+    <svg class="heart heart--l"><use href="#heart"/></svg>
+    <p>Мне исполняется <b>29</b>!<br>
+      И я очень хочу разделить этот день с близкими и дорогими мне людьми.</p>
+    <p>Буду очень рада видеть вас на моём дне рождения, провести этот вечер вместе,
+      много смеяться, общаться и создавать тёплые воспоминания.</p>
+    <p>Очень жду вас на моём празднике!</p>
+    <svg class="heart heart--r"><use href="#heart"/></svg>
+    <svg class="heart heart--r2"><use href="#heart"/></svg>
+  </section>
+
+  <!-- 4. Дата -->
+  <section id="date" class="date reveal">
+    <div class="date__cake">
+      <img src="media/date-cake.webp" alt="" width="900" height="900">
+      <div class="date__text">
+        <span class="date__day" id="dateText">4 ноября</span>
+        <span class="date__time" id="timeText">17:00</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Место -->
+  <section id="place" class="place reveal">
+    <h2 class="title">Место встречи</h2>
+    <a class="map" id="mapLink" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 320 180" class="map__svg" aria-hidden="true">
+        <rect width="320" height="180" fill="#cfe8c9"/>
+        <path d="M-10 120 C60 90 120 140 190 100 S300 60 330 80" stroke="#fff" stroke-width="14" fill="none"/>
+        <path d="M120 -10 C130 50 110 110 140 190" stroke="#fff" stroke-width="10" fill="none"/>
+        <path d="M-10 40 C80 60 200 20 330 30" stroke="#a8d5f0" stroke-width="18" fill="none"/>
+        <g fill="#5aa65a">
+          <circle cx="40" cy="80" r="9"/><circle cx="58" cy="88" r="7"/><circle cx="250" cy="140" r="10"/>
+          <circle cx="270" cy="130" r="8"/><circle cx="210" cy="150" r="7"/><circle cx="80" cy="150" r="9"/>
+          <circle cx="300" cy="100" r="7"/><circle cx="170" cy="60" r="8"/><circle cx="20" cy="160" r="8"/>
+        </g>
+        <g transform="translate(160 62)">
+          <path d="M0 40 C-6 26 -16 20 -16 8 A16 16 0 0 1 16 8 C16 20 6 26 0 40z" fill="#ff4fa3" stroke="#fff" stroke-width="3"/>
+          <circle cy="8" r="6" fill="#fff"/>
+        </g>
+      </svg>
+    </a>
+    <p class="place__name" id="placeName">База отдыха Black Pine</p>
+    <p class="place__addr" id="placeAddr"></p>
+    <a class="pill" id="mapButton" href="#" target="_blank" rel="noopener">Открыть в картах</a>
+  </section>
+
+  <!-- 6. Анкета -->
+  <section id="rsvp" class="rsvp reveal">
+    <form class="dialog" id="rsvpForm" novalidate>
+      <div class="dialog__head">
+        <svg viewBox="0 0 40 80" class="dialog__icon"><use href="#plumbob-green"/></svg>
+        <span>Анкета гостя</span>
+      </div>
+      <label class="dialog__label" for="rsvpName">Имя и фамилия</label>
+      <input class="dialog__input" id="rsvpName" name="name" autocomplete="name" maxlength="80">
+
+      <fieldset class="dialog__group">
+        <legend class="dialog__label">Будете присутствовать?</legend>
+        <label class="opt"><input type="radio" name="attend" value="yes"><span>Да, приду!</span></label>
+        <label class="opt"><input type="radio" name="attend" value="no"><span>Не смогу</span></label>
+      </fieldset>
+
+      <fieldset class="dialog__group">
+        <legend class="dialog__label">Какой алкоголь вы предпочитаете?</legend>
+        <label class="opt"><input type="checkbox" name="drinks" value="Вино"><span>Вино</span></label>
+        <label class="opt"><input type="checkbox" name="drinks" value="Водка"><span>Водка</span></label>
+        <label class="opt"><input type="checkbox" name="drinks" value="Виски"><span>Виски</span></label>
+        <label class="opt"><input type="checkbox" name="drinks" value="Не буду пить алкоголь"><span>Не буду пить алкоголь</span></label>
+      </fieldset>
+
+      <p class="dialog__errors" id="rsvpErrors" role="alert"></p>
+      <button class="dialog__send" type="submit" id="rsvpSend">Отправить</button>
+    </form>
+  </section>
+
+  <!-- 7. Финал -->
+  <section id="final" class="final reveal">
+    <h2 class="title title--final">
+      <svg class="heart heart--inline"><use href="#heart"/></svg>
+      Жду вас через
+      <svg class="heart heart--inline"><use href="#heart"/></svg>
+    </h2>
+    <div class="stage stage--final">
+      <video class="stage__video on" id="finalVideo" playsinline muted loop preload="auto"></video>
+      <div class="plumbob plumbob--float plumbob--final"><svg viewBox="0 0 40 80"><use href="#plumbob-green"/></svg></div>
+    </div>
+    <div class="countdown" id="countdown">
+      <div><b id="cdDays">00</b><span>Дней</span></div>
+      <div><b id="cdHours">00</b><span>Часов</span></div>
+      <div><b id="cdMinutes">00</b><span>Минут</span></div>
+      <div><b id="cdSeconds">00</b><span>Секунд</span></div>
+    </div>
+    <p class="started" id="started" hidden>Праздник уже идёт!</p>
+    <div class="needs">
+      <div class="needs__row"><span>Веселье</span><i><em data-need="1"></em></i></div>
+      <div class="needs__row"><span>Общение</span><i><em data-need="0.9"></em></i></div>
+      <div class="needs__row"><span>Голод</span><i><em data-need="0.8"></em></i></div>
+    </div>
+  </section>
+
+</main>
+
+<button class="music" id="music" aria-label="Музыка" hidden>♫</button>
+
+<div class="wish" id="wish" hidden>
+  <div class="wish__card">
+    <svg viewBox="0 0 40 80" class="wish__plumbob"><use href="#plumbob-green"/></svg>
+    <p class="wish__title">Желание исполнено!</p>
+    <p class="wish__text" id="wishText">Спасибо! Ответ отправлен.</p>
+    <p class="wish__points">+500 <span>очков счастья</span></p>
+    <button class="pill" id="wishClose" type="button">Ура!</button>
+  </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
