@@ -21,14 +21,12 @@ export const CONFIG = {
   // confettiAt — секунда, когда сайт запускает конфетти;
   // voice: true — в ролике есть голос, музыку на это время приглушаем.
   clips: [
-    { src: 'media/a-outfit.mp4', poster: 'media/poster-a.jpg', voice: true, swirl: [2.7, 4.5] },
-    { src: 'media/b-cake.mp4' },
-    { src: 'media/c-candles.mp4', confettiAt: 2.0 },
+    // один склеенный ролик (tools/join_scene.swift): переодевание → торт → свечи
+    { src: 'media/scene.mp4', poster: 'media/poster-a.jpg', voice: true, swirl: [2.7, 4.5], confettiAt: 10.0 },
   ],
   finalClip: { src: 'media/d-final.mp4', poster: 'media/poster-d.jpg' },
 
-  preload: ['media/a-outfit.mp4', 'media/b-cake.mp4', 'media/c-candles.mp4',
-            'media/d-final.mp4', 'media/cover.webp', 'media/date-cake.webp'],
+  preload: ['media/scene.mp4', 'media/d-final.mp4', 'media/cover.webp', 'media/date-cake.webp'],
 
   loadingPhrases: [
     'Взбиваем крем для торта…',

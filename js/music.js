@@ -70,5 +70,47 @@ export function initMusic(src) {
   });
   paint();
 
-  return { start: unlock, duck() {} };
+  // Звук хлопушки (синтез, без чужих файлов): хлопок + низкий «бум» + шелест конфетти,
+  // две хлопушки — слева и справа.
+  const noise = seconds => {
+    const b = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * seconds), ctx.sampleRate);
+    const d = b.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    return b;
+  };
+  const popAt = (when, pan) => {
+    const out = ctx.createStereoPanner ? ctx.createStereoPanner() : ctx.createGain();
+    if (out.pan) out.pan.value = pan;
+    out.connect(ctx.destination);
+    // хлопок
+    const n = ctx.createBufferSource(); n.buffer = noise(0.3);
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1700; bp.Q.value = 0.8;
+    const g1 = ctx.createGain();
+    g1.gain.setValueAtTime(0.0001, when);
+    g1.gain.exponentialRampToValueAtTime(1.0, when + 0.004);
+    g1.gain.exponentialRampToValueAtTime(0.001, when + 0.16);
+    n.connect(bp).connect(g1).connect(out); n.start(when); n.stop(when + 0.3);
+    // низкий «бум»
+    const o = ctx.createOscillator(); o.type = 'sine';
+    o.frequency.setValueAtTime(170, when); o.frequency.exponentialRampToValueAtTime(45, when + 0.12);
+    const g2 = ctx.createGain();
+    g2.gain.setValueAtTime(0.7, when); g2.gain.exponentialRampToValueAtTime(0.001, when + 0.18);
+    o.connect(g2).connect(out); o.start(when); o.stop(when + 0.2);
+    // шелест падающего конфетти
+    const r = ctx.createBufferSource(); r.buffer = noise(1.4);
+    const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 5500;
+    const g3 = ctx.createGain();
+    g3.gain.setValueAtTime(0.0001, when + 0.03);
+    g3.gain.exponentialRampToValueAtTime(0.12, when + 0.12);
+    g3.gain.exponentialRampToValueAtTime(0.001, when + 1.3);
+    r.connect(hp).connect(g3).connect(out); r.start(when + 0.03); r.stop(when + 1.4);
+  };
+  const pop = () => {
+    if (ctx.state !== 'running') return;
+    const t = ctx.currentTime + 0.01;
+    popAt(t, -0.6);
+    popAt(t + 0.05, 0.6);
+  };
+
+  return { start: unlock, duck() {}, pop };
 }

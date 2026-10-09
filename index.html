@@ -14,7 +14,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 80'%3E%3Cpolygon points='20,0 2,40 20,80 38,40' fill='%233ddc4a'/%3E%3Cpolygon points='20,0 38,40 20,80' fill='%23127a22'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -60,18 +60,17 @@
       <div class="swirl" id="casSwirl" aria-hidden="true"></div>
       <canvas class="confetti" id="casConfetti" aria-hidden="true"></canvas>
       <div class="sparkle" aria-hidden="true">✦</div>
+      <!-- 2. Обложка «Мои 29» — появляется на месте ролика, когда он закончится -->
+      <div class="stage__cover" id="casCover">
+        <div class="cover__script">Мои</div>
+        <div class="cover__age" id="coverAge">29</div>
+        <div class="cover__sim">
+          <div class="plumbob plumbob--small pb3d pb3d--green"></div>
+          <img src="media/cover.webp" alt="Соня с праздничным тортом" width="900" height="2678">
+        </div>
+      </div>
     </div>
     <div class="scroll-hint" id="scrollHint">листайте вниз<span>⌄</span></div>
-  </section>
-
-  <!-- 2. Обложка -->
-  <section id="cover" class="cover reveal">
-    <div class="cover__script">Мои</div>
-    <div class="cover__age" id="coverAge">29</div>
-    <div class="cover__sim">
-      <div class="plumbob plumbob--small pb3d pb3d--green"></div>
-      <img src="media/cover.webp" alt="Соня с праздничным тортом" width="900" height="2678">
-    </div>
   </section>
 
   <!-- 3. Приглашение -->

@@ -45,6 +45,7 @@ export function playScene({ clips, blobs, music, onDone }) {
       if (clip.confettiAt != null && !confettiDone && t >= clip.confettiAt) {
         confettiDone = true;
         burstConfetti(canvas);
+        music.pop?.();
       }
       if (!video.ended) requestAnimationFrame(tick);
     };

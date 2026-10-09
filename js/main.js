@@ -48,7 +48,11 @@ startLoader({
       clips: CONFIG.clips,
       blobs,
       music,
-      onDone: () => $('scrollHint').classList.add('on'),
+      onDone: () => {
+        $('casStage').classList.add('done');
+        $('casCover').classList.add('on');
+        $('scrollHint').classList.add('on');
+      },
     });
   },
 });
