@@ -1,10 +1,10 @@
-import { CONFIG } from './config.js?v=20261009174135';
-import { startLoader } from './loader.js?v=20261009174135';
-import { initMusic } from './music.js?v=20261009174135';
-import { playScene } from './scene.js?v=20261009174135';
-import { initRsvp } from './rsvp.js?v=20261009174135';
-import { initFinal } from './final.js?v=20261009174135';
-import { buildPlumbobs } from './plumbob.js?v=20261009174135';
+import { CONFIG } from './config.js?v=20261009175226';
+import { startLoader } from './loader.js?v=20261009175226';
+import { initMusic } from './music.js?v=20261009175226';
+import { playScene } from './scene.js?v=20261009175226';
+import { initRsvp } from './rsvp.js?v=20261009175226';
+import { initFinal } from './final.js?v=20261009175226';
+import { buildPlumbobs } from './plumbob.js?v=20261009175226';
 
 const $ = id => document.getElementById(id);
 
@@ -34,7 +34,7 @@ const io = new IntersectionObserver(entries => {
       finalVideo.play().catch(() => {});
     }
   }
-}, { threshold: 0.2 });
+}, { threshold: 0.12, rootMargin: '0px 0px -12% 0px' });
 document.querySelectorAll('.reveal').forEach(s => io.observe(s));
 
 startLoader({
