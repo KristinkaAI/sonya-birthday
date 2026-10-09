@@ -9,6 +9,16 @@ export function initRsvp(url) {
   const wishText = document.getElementById('wishText');
   document.getElementById('wishClose').addEventListener('click', () => { wish.hidden = true; });
 
+  // «Не буду пить алкоголь» снимает остальные напитки, и наоборот
+  const NO_ALCOHOL = 'Не буду пить алкоголь';
+  const drinkBoxes = [...form.querySelectorAll('input[name="drinks"]')];
+  drinkBoxes.forEach(box => box.addEventListener('change', () => {
+    if (!box.checked) return;
+    drinkBoxes.forEach(other => {
+      if (other !== box && (box.value === NO_ALCOHOL || other.value === NO_ALCOHOL)) other.checked = false;
+    });
+  }));
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const data = {
