@@ -13,8 +13,8 @@ export const CONFIG = {
   // Ссылка на веб-приложение Google Apps Script (см. apps-script/ИНСТРУКЦИЯ.md)
   rsvpUrl: 'https://script.google.com/macros/s/AKfycbxZLbr1xHC1ItNSDo7JsgJxA5TXAEl3gmcMpOHgr7KnYFaaHcOTCd-RCWQtjJibiDW8/exec',
 
-  // Музыка: положите файл site/media/music.mp3 — нотка появится сама
-  musicSrc: 'media/music.mp3',
+  // Музыка: тихая версия с нарастанием, делается tools/soft_music.swift
+  musicSrc: 'media/music.m4a',
 
   // Ролики сцены «Создание персонажа» — идут подряд.
   // swirl: [от, до] — секунды, когда сайт добавляет вихрь искр;
