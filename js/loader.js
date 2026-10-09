@@ -1,5 +1,5 @@
 // Экран загрузки: предзагружает медиа с прогрессом, крутит шуточные фразы,
-// по нажатию «Открыть» синхронно вызывает onOpen (это жест пользователя — можно включать звук).
+// по нажатию на кристалл синхронно вызывает onOpen (это жест пользователя — можно включать звук).
 
 async function fetchWithProgress(url, onBytes) {
   const res = await fetch(url);
@@ -27,7 +27,7 @@ export function startLoader({ urls, phrases, onOpen }) {
   const el = document.getElementById('loader');
   const fill = document.getElementById('loaderFill');
   const phrase = document.getElementById('loaderPhrase');
-  const button = document.getElementById('loaderOpen');
+  const gem = document.getElementById('loaderPlumbob');
   document.body.classList.add('locked');
 
   let i = 0;
@@ -55,15 +55,23 @@ export function startLoader({ urls, phrases, onOpen }) {
     clearInterval(timer);
     phrase.textContent = 'Всё готово!';
     fill.style.width = '100%';
-    button.hidden = false;
+    // Кристалл пульсирует — нажатие на него (или в любое место экрана) открывает приглашение
+    el.classList.add('ready');
+    gem.tabIndex = 0;
     return new Promise(resolve => {
-      button.addEventListener('click', () => {
+      const open = e => {
+        if (e.target.closest('#music')) return; // нотка — отдельно
+        el.removeEventListener('click', open);
+        gem.removeEventListener('keydown', onKey);
         onOpen(blobs); // синхронно, внутри жеста
         el.classList.add('hide');
         document.body.classList.remove('locked');
         setTimeout(() => el.remove(), 700);
         resolve(blobs);
-      }, { once: true });
+      };
+      const onKey = e => { if (e.key === 'Enter' || e.key === ' ') open(e); };
+      el.addEventListener('click', open);
+      gem.addEventListener('keydown', onKey);
     });
   });
 }

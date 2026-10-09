@@ -1,68 +1,74 @@
-// Фоновая музыка.
-// — Пытаемся включить сразу при загрузке; если браузер запрещает звук без касания
-//   (телефоны), музыка стартует от первого касания в любом месте.
-// — Громкость и плавное нарастание встроены в сам файл (на iPhone сайт не может менять громкость).
-// — Голос в роликах звучит поверх музыки, музыку не приглушаем.
+// Фоновая музыка через Web Audio.
+// Почему не <audio>: на iPhone одновременно звучит только один медиа-элемент страницы,
+// и ролик с голосом выключал музыку. Web Audio звучит вместе с видео.
+// — Пытаемся включить сразу; если браузер не разрешает звук без касания —
+//   включаем при первом касании (touchend / click / keydown).
+// — Тихая громкость и плавное нарастание встроены в файл; по кругу играем без
+//   повторного нарастания (loopStart = конец вступления).
 // — Нотка: выключить / включить; при включении трек начинается сначала.
-// — По кругу: после конца трека продолжаем с конца вступления, без повторного нарастания.
-const FADE_END = 3; // секунд нарастания, встроенных в файл
+const FADE_END = 3;
 
 export function initMusic(src) {
   const button = document.getElementById('music');
-  const audio = new Audio(src);
-  audio.preload = 'auto';
-  audio.addEventListener('error', () => { button.hidden = true; });
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) { button.hidden = true; return { start() {}, duck() {} }; }
 
-  let wantOn = true;     // пользователь не выключал нотку
-  let playing = false;
-  let startedAt = 0;
+  // iOS 17+: играть и в беззвучном режиме, вместе с видео
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch {}
+
+  const ctx = new AC();
+  let buffer = null;
+  let source = null;
+  let wantOn = true;
+  let resumedAt = 0; // когда звук только что разрешили — касание не считаем выключением
 
   const paint = () => {
-    button.classList.toggle('waiting', wantOn && !playing);
     button.classList.toggle('off', !wantOn);
-    button.classList.toggle('playing', wantOn && playing);
-  };
-  audio.addEventListener('playing', () => { playing = true; paint(); });
-  audio.addEventListener('pause', () => { playing = false; paint(); });
-  audio.addEventListener('ended', () => {
-    if (!wantOn) return;
-    audio.currentTime = FADE_END;
-    audio.play().catch(() => {});
-  });
-
-  const play = fromStart => {
-    if (fromStart) audio.currentTime = 0;
-    startedAt = performance.now();
-    return audio.play();
+    button.classList.toggle('playing', wantOn && Boolean(source) && ctx.state === 'running');
   };
 
-  // 1. Пробуем без касания
-  play(true).catch(() => {});
-
-  // 2. Первое касание в любом месте
-  const onGesture = () => {
-    if (wantOn && !playing && audio.paused) play(audio.currentTime > 0.5 ? false : true).catch(() => {});
+  const begin = () => {
+    if (!wantOn || !buffer || source || ctx.state !== 'running') { paint(); return; }
+    source = ctx.createBufferSource();
+    source.buffer = buffer;
+    source.loop = true;
+    source.loopStart = FADE_END;
+    source.loopEnd = buffer.duration;
+    source.connect(ctx.destination);
+    source.start(0, 0);
+    paint();
   };
-  ['pointerup', 'touchend', 'click', 'keydown'].forEach(e =>
-    window.addEventListener(e, onGesture, { capture: true, passive: true }));
 
-  // 3. Нотка
+  const stop = () => {
+    if (source) { try { source.stop(); } catch {} source.disconnect(); source = null; }
+    paint();
+  };
+
+  fetch(src)
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+    .then(data => new Promise((ok, fail) => ctx.decodeAudioData(data, ok, fail)))
+    .then(b => { buffer = b; begin(); })
+    .catch(() => { button.hidden = true; });
+
+  ctx.onstatechange = () => {
+    if (ctx.state === 'running') { resumedAt = performance.now(); begin(); } else paint();
+  };
+
+  // Вызывать внутри жеста пользователя
+  const unlock = () => {
+    if (ctx.state !== 'running') ctx.resume().then(begin).catch(() => {});
+    else begin();
+  };
+  ['touchend', 'click', 'keydown'].forEach(e =>
+    window.addEventListener(e, unlock, { capture: true, passive: true }));
+
   button.addEventListener('click', e => {
     e.stopPropagation();
-    if (performance.now() - startedAt < 800) return; // это же касание только что включило музыку
-    if (wantOn && !audio.paused) {
-      wantOn = false;
-      audio.pause();
-    } else {
-      wantOn = true;
-      play(true).catch(() => {});
-    }
-    paint();
+    if (ctx.state !== 'running' || performance.now() - resumedAt < 800) { wantOn = true; unlock(); return; }
+    if (wantOn && source) { wantOn = false; stop(); }
+    else { wantOn = true; stop(); begin(); }
   });
   paint();
 
-  return {
-    start: onGesture,
-    duck() {}, // голос и музыка звучат вместе
-  };
+  return { start: unlock, duck() {} };
 }

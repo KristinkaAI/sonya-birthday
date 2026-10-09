@@ -44,10 +44,9 @@
 
 <!-- 0. Загрузка -->
 <div id="loader" class="loader">
-  <div class="loader__plumbob pb3d pb3d--pink"></div>
+  <div class="loader__plumbob pb3d pb3d--pink" id="loaderPlumbob" role="button" aria-label="Открыть приглашение" tabindex="-1"></div>
   <p class="loader__phrase" id="loaderPhrase">Загрузка…</p>
   <div class="loader__bar"><div class="loader__fill" id="loaderFill"></div></div>
-  <button class="loader__open" id="loaderOpen" hidden>Нажмите, чтобы открыть</button>
 </div>
 
 <main class="column">
@@ -180,7 +179,7 @@
 
 </main>
 
-<button class="music" id="music" aria-label="Музыка">♫<span class="music__hint" id="musicHint">включить звук</span></button>
+<button class="music" id="music" aria-label="Музыка">♫</button>
 
 <div class="wish" id="wish" hidden>
   <div class="wish__card">

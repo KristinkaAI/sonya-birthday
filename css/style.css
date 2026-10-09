@@ -60,13 +60,10 @@ section { position: relative; }
 .loader__phrase { margin: 0; font-weight: 500; font-size: 17px; min-height: 1.4em; text-shadow: 0 1px 6px rgba(0,0,0,.25); }
 .loader__bar { width: min(260px, 70vw); height: 12px; border-radius: 99px; background: rgba(255,255,255,.3); box-shadow: inset 0 1px 3px rgba(0,0,0,.2); overflow: hidden; }
 .loader__fill { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #b8ff9c, var(--green)); transition: width .3s; }
-.loader__open {
-  font: 700 15px var(--sans); letter-spacing: 1.5px; text-transform: uppercase;
-  color: #fff; background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.85);
-  border-radius: 99px; padding: 14px 26px; cursor: pointer;
-  animation: pulse 1.6s ease-in-out infinite;
-}
 @keyframes pulse { 50% { transform: scale(1.06); box-shadow: 0 0 24px rgba(255,255,255,.5); } }
+.loader.ready { cursor: pointer; }
+.loader.ready .loader__plumbob { cursor: pointer; animation: bob 2.4s ease-in-out infinite, gemPulse 1.6s ease-in-out infinite; }
+@keyframes gemPulse { 50% { scale: 1.14; filter: drop-shadow(0 0 22px rgba(255, 79, 163, 1)) brightness(1.1); } }
 
 /* ---------- 1. Создание персонажа ---------- */
 .cas { background: var(--cas); padding-bottom: 6px; }
@@ -226,13 +223,7 @@ section { position: relative; }
   box-shadow: 0 6px 18px rgba(224, 35, 127, .45);
 }
 .music.off { opacity: .55; text-decoration: line-through; }
-.music.waiting { animation: pulse 1.4s ease-in-out infinite; }
-.music__hint {
-  position: absolute; right: 60px; top: 50%; translate: 0 -50%; white-space: nowrap;
-  font: 600 13px var(--sans); color: var(--navy); background: #fff; padding: 7px 12px; border-radius: 99px;
-  box-shadow: 0 4px 14px rgba(27,42,107,.2); text-decoration: none;
-}
-.music:not(.waiting) .music__hint { display: none; }
+
 .music.playing { animation: twinkle 2.4s ease-in-out infinite; }
 
 /* ---------- Желание исполнено ---------- */
