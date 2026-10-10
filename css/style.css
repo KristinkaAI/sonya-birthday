@@ -69,7 +69,7 @@ section { position: relative; }
 @keyframes gemPulse { 50% { scale: 1.14; filter: drop-shadow(0 0 22px rgba(255, 79, 163, 1)) brightness(1.1); } }
 
 /* ---------- 1. Создание персонажа ---------- */
-.cas { position: relative; background: #739fbf url(../media/bg-scene.jpg?v=20261010183617) center / 100% 100% no-repeat; padding-bottom: 90px; overflow: hidden; }
+.cas { position: relative; background: #739fbf url(../media/bg-scene.jpg?v=20261010184512) center / 100% 100% no-repeat; padding-bottom: 90px; overflow: hidden; }
 .cas::after, .final::after {
   content: ''; position: absolute; left: 0; right: 0; pointer-events: none; z-index: 2;
 }
@@ -84,11 +84,11 @@ section { position: relative; }
   /* гладкий фон из кадра ролика точно за видео; края растворяются кругом в фон блока */
   content: ''; position: absolute; left: 50%; bottom: -41.67cqw; width: 250cqw; height: 263.33cqw;
   transform: translateX(-50%); pointer-events: none;
-  background: url(../media/bg-scene.jpg?v=20261010183617) center / 100% 100% no-repeat;
+  background: url(../media/bg-scene.jpg?v=20261010184512) center / 100% 100% no-repeat;
   -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
           mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
 }
-.stage--final::before { background-image: url(../media/bg-final.jpg?v=20261010183617); }
+.stage--final::before { background-image: url(../media/bg-final.jpg?v=20261010184512); }
 /* мягкие боковые края ролика (отдельный слой: на iPhone составные маски не работают) */
 .vfade {
   position: absolute; inset: 0; pointer-events: none;
@@ -185,7 +185,7 @@ section { position: relative; }
 /* ---------- 5. Место ---------- */
 .place { padding: 20px 24px 44px; text-align: center; }
 .map { display: block; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 28px rgba(27,42,107,.18); border: 4px solid #fff; }
-.map__svg { display: block; width: 100%; height: auto; }
+.map__img { display: block; width: 100%; height: auto; }
 .place__name { margin: 18px 0 2px; font-weight: 700; font-size: 18px; text-transform: uppercase; letter-spacing: .5px; }
 .place__addr { margin: 0 0 16px; font-size: 14px; opacity: .75; }
 .pill {
@@ -238,7 +238,7 @@ section { position: relative; }
 .dialog__send:disabled { opacity: .6; cursor: progress; }
 
 /* ---------- 7. Финал ---------- */
-.final { position: relative; background: #7498b9 url(../media/bg-final.jpg?v=20261010183617) center / 100% 100% no-repeat; padding: 110px 0 80px; text-align: center; overflow: hidden; }
+.final { position: relative; background: #7498b9 url(../media/bg-final.jpg?v=20261010184512) center / 100% 100% no-repeat; padding: 110px 0 80px; text-align: center; overflow: hidden; }
 .final::after { top: 0; height: 300px; background: linear-gradient(to top, rgba(238,244,251,0), rgba(238,244,251,.45) 55%, var(--paper)); }
 .final > * { position: relative; z-index: 3; }
 .final > .title--final { color: var(--navy); z-index: 5; }
