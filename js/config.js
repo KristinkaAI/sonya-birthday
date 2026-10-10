@@ -14,7 +14,7 @@ export const CONFIG = {
   rsvpUrl: 'https://script.google.com/macros/s/AKfycbxZLbr1xHC1ItNSDo7JsgJxA5TXAEl3gmcMpOHgr7KnYFaaHcOTCd-RCWQtjJibiDW8/exec',
 
   // Музыка: тихая версия с нарастанием, делается tools/soft_music.swift
-  musicSrc: 'media/music.m4a?v=20261010182111',
+  musicSrc: 'media/music.m4a?v=20261010183617',
 
   // Ролики сцены «Создание персонажа» — идут подряд.
   // swirl: [от, до] — секунды, когда сайт добавляет вихрь искр;
@@ -22,19 +22,15 @@ export const CONFIG = {
   // voice: true — в ролике есть голос, музыку на это время приглушаем.
   clips: [
     // один склеенный ролик (tools/join_scene.swift): переодевание → торт → свечи
-    { src: 'media/scene.mp4?v=20261010182111', poster: 'media/poster-a.jpg?v=20261010182111', voice: true, swirl: [2.7, 4.5], confettiAt: 10.0 },
+    { src: 'media/scene.mp4?v=20261010183617', poster: 'media/poster-a.jpg?v=20261010183617', voice: true, swirl: [2.7, 4.5], confettiAt: 10.0 },
   ],
-  finalClip: { src: 'media/d-final.mp4?v=20261010182111', poster: 'media/poster-d.jpg?v=20261010182111' },
+  finalClip: { src: 'media/d-final.mp4?v=20261010183617', poster: 'media/poster-d.jpg?v=20261010183617' },
 
-  preload: ['media/scene.mp4?v=20261010182111', 'media/d-final.mp4?v=20261010182111', 'media/cover.webp?v=20261010182111', 'media/date-cake.webp?v=20261010182111'],
+  preload: ['media/scene.mp4?v=20261010183617', 'media/d-final.mp4?v=20261010183617', 'media/cover.webp?v=20261010183617', 'media/date-cake.webp?v=20261010183617'],
 
   loadingPhrases: [
-    'Взбиваем крем для торта…',
     'Надуваем шарики…',
-    'Ретикулируем сплайны…',
-    'Подбираем платье…',
+    'Взбиваем крем для торта…',
     'Зажигаем свечи…',
-    'Наполняем бокалы…',
-    'Повышаем настроение до максимума…',
   ],
 };

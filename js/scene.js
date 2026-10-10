@@ -1,6 +1,6 @@
 // Сцена «Создание персонажа»: ролики подряд на двух <video> без мигания,
 // вихрь искр и конфетти по таймингам из конфига.
-import { burstConfetti } from './confetti.js?v=20261010182111';
+import { burstConfetti } from './confetti.js?v=20261010183617';
 
 function makeSwirl(host, seconds) {
   host.innerHTML = '';

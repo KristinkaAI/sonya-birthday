@@ -62,11 +62,14 @@ section { position: relative; }
 .loader__fill { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #b8ff9c, var(--green)); transition: width .3s; }
 @keyframes pulse { 50% { transform: scale(1.06); box-shadow: 0 0 24px rgba(255,255,255,.5); } }
 .loader.ready { cursor: pointer; }
+.loader__tap { margin: 0; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.92); letter-spacing: .3px; opacity: 0; transition: opacity .6s; }
+.loader.ready .loader__tap { opacity: 1; animation: tapBlink 2s ease-in-out infinite; }
+@keyframes tapBlink { 50% { opacity: .55; } }
 .loader.ready .loader__plumbob { cursor: pointer; animation: bob 2.4s ease-in-out infinite, gemPulse 1.6s ease-in-out infinite; }
 @keyframes gemPulse { 50% { scale: 1.14; filter: drop-shadow(0 0 22px rgba(255, 79, 163, 1)) brightness(1.1); } }
 
 /* ---------- 1. Создание персонажа ---------- */
-.cas { position: relative; background: #739fbf url(../media/bg-scene.jpg?v=20261010182111) center / 100% 100% no-repeat; padding-bottom: 90px; overflow: hidden; }
+.cas { position: relative; background: #739fbf url(../media/bg-scene.jpg?v=20261010183617) center / 100% 100% no-repeat; padding-bottom: 90px; overflow: hidden; }
 .cas::after, .final::after {
   content: ''; position: absolute; left: 0; right: 0; pointer-events: none; z-index: 2;
 }
@@ -81,11 +84,11 @@ section { position: relative; }
   /* гладкий фон из кадра ролика точно за видео; края растворяются кругом в фон блока */
   content: ''; position: absolute; left: 50%; bottom: -41.67cqw; width: 250cqw; height: 263.33cqw;
   transform: translateX(-50%); pointer-events: none;
-  background: url(../media/bg-scene.jpg?v=20261010182111) center / 100% 100% no-repeat;
+  background: url(../media/bg-scene.jpg?v=20261010183617) center / 100% 100% no-repeat;
   -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
           mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
 }
-.stage--final::before { background-image: url(../media/bg-final.jpg?v=20261010182111); }
+.stage--final::before { background-image: url(../media/bg-final.jpg?v=20261010183617); }
 /* мягкие боковые края ролика (отдельный слой: на iPhone составные маски не работают) */
 .vfade {
   position: absolute; inset: 0; pointer-events: none;
@@ -235,7 +238,7 @@ section { position: relative; }
 .dialog__send:disabled { opacity: .6; cursor: progress; }
 
 /* ---------- 7. Финал ---------- */
-.final { position: relative; background: #7498b9 url(../media/bg-final.jpg?v=20261010182111) center / 100% 100% no-repeat; padding: 110px 0 80px; text-align: center; overflow: hidden; }
+.final { position: relative; background: #7498b9 url(../media/bg-final.jpg?v=20261010183617) center / 100% 100% no-repeat; padding: 110px 0 80px; text-align: center; overflow: hidden; }
 .final::after { top: 0; height: 300px; background: linear-gradient(to top, rgba(238,244,251,0), rgba(238,244,251,.45) 55%, var(--paper)); }
 .final > * { position: relative; z-index: 3; }
 .final > .title--final { color: var(--navy); z-index: 5; }
@@ -280,7 +283,7 @@ section { position: relative; }
 .reveal > :nth-child(4) { transition-delay: .36s; }
 .reveal > :nth-child(n+5) { transition-delay: .45s; }
 .reveal:not(.in) > * { opacity: 0; transform: translateY(46px) scale(.97); filter: blur(10px); }
-.reveal > .stage--final, .reveal:not(.in) > .stage--final { transform: scale(var(--grow, .84)); filter: none; transition: opacity 1.3s ease; transform-origin: 50% 100%; will-change: transform; }
+.reveal > .stage--final, .reveal:not(.in) > .stage--final { transform: none; filter: none; transition: opacity 1.3s ease; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
