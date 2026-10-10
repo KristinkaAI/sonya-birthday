@@ -1,6 +1,6 @@
-// Финал: обратный отсчёт и полоски потребностей.
-import { FINAL_TRACK } from './final-track.js?v=20261009180150';
-import { countdown, needsLevel, pad2 } from './logic.js?v=20261009180150';
+// Финал: обратный отсчёт и алмаз, следующий за головой.
+import { FINAL_TRACK } from './final-track.js?v=20261010180653';
+import { countdown, pad2 } from './logic.js?v=20261010180653';
 
 export function initFinal(partyISO) {
   const target = Date.parse(partyISO);
@@ -19,11 +19,6 @@ export function initFinal(partyISO) {
   tick();
   setInterval(tick, 1000);
 
-  const level = needsLevel(Date.now(), target);
-  // полоски заполняются, когда финал появляется на экране
-  const fillNeeds = () => document.querySelectorAll('[data-need]').forEach(b => {
-    b.style.width = `${Math.round(level * Number(b.dataset.need) * 100)}%`;
-  });
   // Алмаз над головой следует за макушкой по таблице FINAL_TRACK
   const video = el('finalVideo');
   const gem = document.querySelector('.plumbob--final');
@@ -47,5 +42,5 @@ export function initFinal(partyISO) {
   };
   requestAnimationFrame(follow);
 
-  return { fillNeeds };
+  return { fillNeeds() {} };
 }
