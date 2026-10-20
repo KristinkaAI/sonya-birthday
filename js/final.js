@@ -1,6 +1,6 @@
 // Финал: обратный отсчёт и алмаз, следующий за головой.
-import { FINAL_TRACK } from './final-track.js?v=20261010184512';
-import { countdown, pad2 } from './logic.js?v=20261010184512';
+import { FINAL_TRACK } from './final-track.js?v=20261020153111';
+import { countdown, pad2 } from './logic.js?v=20261020153111';
 
 export function initFinal(partyISO) {
   const target = Date.parse(partyISO);

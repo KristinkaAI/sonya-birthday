@@ -1,5 +1,5 @@
 // Анкета гостя → Google Apps Script → Гугл-таблица.
-import { validateRsvp } from './logic.js?v=20261010184512';
+import { validateRsvp } from './logic.js?v=20261020153111';
 
 export function initRsvp(url) {
   const form = document.getElementById('rsvpForm');
@@ -9,15 +9,17 @@ export function initRsvp(url) {
   const wishText = document.getElementById('wishText');
   document.getElementById('wishClose').addEventListener('click', () => { wish.hidden = true; });
 
-  // «Не буду пить алкоголь» снимает остальные напитки, и наоборот
-  const NO_ALCOHOL = 'Не буду пить алкоголь';
-  const drinkBoxes = [...form.querySelectorAll('input[name="drinks"]')];
-  drinkBoxes.forEach(box => box.addEventListener('change', () => {
-    if (!box.checked) return;
-    drinkBoxes.forEach(other => {
-      if (other !== box && (box.value === NO_ALCOHOL || other.value === NO_ALCOHOL)) other.checked = false;
-    });
-  }));
+  // «Не смогу» — напитки блёкнут и становятся недоступны (выбор снимается)
+  const drinksGroup = document.getElementById('rsvpDrinks');
+  const drinkBoxes = [...drinksGroup.querySelectorAll('input[name="drinks"]')];
+  const syncDrinks = () => {
+    const off = form.querySelector('input[name="attend"]:checked')?.value === 'no';
+    drinksGroup.classList.toggle('is-off', off);
+    drinksGroup.setAttribute('aria-disabled', String(off));
+    drinkBoxes.forEach(b => { b.disabled = off; if (off) b.checked = false; });
+  };
+  form.querySelectorAll('input[name="attend"]').forEach(r => r.addEventListener('change', syncDrinks));
+  form.addEventListener('reset', () => setTimeout(syncDrinks));
 
   form.addEventListener('submit', async e => {
     e.preventDefault();

@@ -7,7 +7,7 @@
   <meta name="description" content="Приглашение на день рождения Сони, 4 ноября">
   <meta property="og:title" content="Соне 29 — приглашение">
   <meta property="og:description" content="4 ноября, 17:00 · Black Pine">
-  <meta property="og:image" content="https://kristinkaai.github.io/sonya-birthday/media/poster-d.jpg?v=20261010184512">
+  <meta property="og:image" content="https://kristinkaai.github.io/sonya-birthday/media/poster-d.jpg?v=20261020153111">
   <meta property="og:url" content="https://kristinkaai.github.io/sonya-birthday/">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#6f9ec4">
@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261010184512">
+  <link rel="stylesheet" href="css/style.css?v=20261020153111">
 </head>
 <body>
 
@@ -61,7 +61,6 @@
       </div>
       <div class="plumbob plumbob--float pb3d pb3d--green" id="casPlumbob"></div>
       <div class="swirl" id="casSwirl" aria-hidden="true"></div>
-      <canvas class="confetti" id="casConfetti" aria-hidden="true"></canvas>
       <div class="sparkle" aria-hidden="true">✦</div>
       <!-- 2. Обложка «Мои 29» — появляется на месте ролика, когда он закончится -->
       <div class="stage__cover" id="casCover">
@@ -69,7 +68,7 @@
         <div class="cover__age" id="coverAge">29</div>
         <div class="cover__sim">
           <div class="plumbob plumbob--small pb3d pb3d--green"></div>
-          <img src="media/cover.webp?v=20261010184512" alt="Соня с праздничным тортом" width="900" height="2678">
+          <img src="media/cover.webp?v=20261020153111" alt="Соня с праздничным тортом" width="900" height="2678">
         </div>
       </div>
     </div>
@@ -92,7 +91,7 @@
   <!-- 4. Дата -->
   <section id="date" class="date reveal">
     <div class="date__cake">
-      <img src="media/date-cake.webp?v=20261010184512" alt="" width="900" height="900">
+      <img src="media/date-cake.webp?v=20261020153111" alt="" width="900" height="900">
       <div class="date__text">
         <span class="date__day" id="dateText">4 ноября</span>
         <span class="date__time" id="timeText">17:00</span>
@@ -104,7 +103,7 @@
   <section id="place" class="place reveal">
     <h2 class="title">Место встречи</h2>
     <a class="map" id="mapLink" href="#" target="_blank" rel="noopener">
-      <img class="map__img" src="media/map.webp?v=20261010184512" alt="Карта: база отдыха Black Pine" width="1200" height="675" loading="lazy">
+      <img class="map__img" src="media/map.webp?v=20261020153111" alt="Карта: база отдыха Black Pine" width="1200" height="675" loading="lazy">
     </a>
     <p class="place__name" id="placeName">База отдыха Black Pine</p>
     <p class="place__addr" id="placeAddr"></p>
@@ -127,12 +126,12 @@
         <label class="opt"><input type="radio" name="attend" value="no"><span>Не смогу</span></label>
       </fieldset>
 
-      <fieldset class="dialog__group">
-        <legend class="dialog__label">Какой алкоголь вы предпочитаете?</legend>
+      <fieldset class="dialog__group" id="rsvpDrinks">
+        <legend class="dialog__label">Что будете пить?</legend>
         <label class="opt"><input type="checkbox" name="drinks" value="Вино"><span>Вино</span></label>
-        <label class="opt"><input type="checkbox" name="drinks" value="Водка"><span>Водка</span></label>
-        <label class="opt"><input type="checkbox" name="drinks" value="Виски"><span>Виски</span></label>
-        <label class="opt"><input type="checkbox" name="drinks" value="Не буду пить алкоголь"><span>Не буду пить алкоголь</span></label>
+        <label class="opt"><input type="checkbox" name="drinks" value="Игристое"><span>Игристое</span></label>
+        <label class="opt"><input type="checkbox" name="drinks" value="Лимонад"><span>Лимонад</span></label>
+        <label class="opt"><input type="checkbox" name="drinks" value="Чай"><span>Чай</span></label>
       </fieldset>
 
       <p class="dialog__errors" id="rsvpErrors" role="alert"></p>
@@ -162,6 +161,8 @@
 
 </main>
 
+<canvas class="confetti" id="casConfetti" aria-hidden="true"></canvas>
+
 <button class="music" id="music" aria-label="Музыка">♫</button>
 
 <div class="wish" id="wish" hidden>
@@ -174,6 +175,6 @@
   </div>
 </div>
 
-<script type="module" src="js/main.js?v=20261010184512"></script>
+<script type="module" src="js/main.js?v=20261020153111"></script>
 </body>
 </html>

@@ -69,7 +69,7 @@ section { position: relative; }
 @keyframes gemPulse { 50% { scale: 1.14; filter: drop-shadow(0 0 22px rgba(255, 79, 163, 1)) brightness(1.1); } }
 
 /* ---------- 1. Создание персонажа ---------- */
-.cas { position: relative; background: #739fbf url(../media/bg-scene.jpg?v=20261010184512) center / 100% 100% no-repeat; padding-bottom: 90px; overflow: hidden; }
+.cas { position: relative; background: #739fbf url(../media/bg-scene.jpg?v=20261020153111) center / 100% 100% no-repeat; padding-bottom: 90px; overflow: hidden; }
 .cas::after, .final::after {
   content: ''; position: absolute; left: 0; right: 0; pointer-events: none; z-index: 2;
 }
@@ -77,18 +77,18 @@ section { position: relative; }
 .cas > .scroll-hint { position: relative; z-index: 3; }
 .stage {
   position: relative; aspect-ratio: 720 / 1380; container-type: inline-size;
-  height: min(calc(100vw * 1380 / 720), calc(480px * 1380 / 720), calc(100svh - 44px));
+  height: min(calc(100vw * 1380 / 720), calc(480px * 1380 / 720), calc(var(--screen-h, 100svh) - 44px));
   margin: 0 auto; max-width: 100%;
 }
 .stage::before {
   /* гладкий фон из кадра ролика точно за видео; края растворяются кругом в фон блока */
   content: ''; position: absolute; left: 50%; bottom: -41.67cqw; width: 250cqw; height: 263.33cqw;
   transform: translateX(-50%); pointer-events: none;
-  background: url(../media/bg-scene.jpg?v=20261010184512) center / 100% 100% no-repeat;
+  background: url(../media/bg-scene.jpg?v=20261020153111) center / 100% 100% no-repeat;
   -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
           mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
 }
-.stage--final::before { background-image: url(../media/bg-final.jpg?v=20261010184512); }
+.stage--final::before { background-image: url(../media/bg-final.jpg?v=20261020153111); }
 /* мягкие боковые края ролика (отдельный слой: на iPhone составные маски не работают) */
 .vfade {
   position: absolute; inset: 0; pointer-events: none;
@@ -136,7 +136,7 @@ section { position: relative; }
   to { transform: rotate(calc(var(--a) + 360deg)) translateX(var(--r)) rotate(calc(-1 * var(--a) - 360deg)); }
 }
 
-.confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.confetti { position: fixed; inset: 0; width: 100vw; height: 100%; pointer-events: none; z-index: 65; }
 
 /* ---------- 2. Обложка «Мои 29» (на месте ролика после его окончания) ---------- */
 .stage__cover {
@@ -229,6 +229,8 @@ section { position: relative; }
 .opt input:checked + span { background: var(--green); border-color: #c9ffbf; color: #0b3d14; font-weight: 600; }
 .opt input:focus-visible + span { outline: 3px solid #fff; outline-offset: 2px; }
 .opt:active span { transform: scale(.96); }
+.dialog__group.is-off { opacity: .35; filter: grayscale(1); pointer-events: none; transition: opacity .4s, filter .4s; }
+.dialog__group { transition: opacity .4s, filter .4s; }
 .dialog__errors { min-height: 1.2em; margin: 10px 0 6px; color: #ffd0e6; font-size: 14px; }
 .dialog__send {
   width: 100%; font: 800 17px var(--sans); letter-spacing: 1px; color: #fff; cursor: pointer;
@@ -238,11 +240,11 @@ section { position: relative; }
 .dialog__send:disabled { opacity: .6; cursor: progress; }
 
 /* ---------- 7. Финал ---------- */
-.final { position: relative; background: #7498b9 url(../media/bg-final.jpg?v=20261010184512) center / 100% 100% no-repeat; padding: 110px 0 80px; text-align: center; overflow: hidden; }
+.final { position: relative; background: #7498b9 url(../media/bg-final.jpg?v=20261020153111) center / 100% 100% no-repeat; padding: 110px 0 80px; text-align: center; overflow: hidden; }
 .final::after { top: 0; height: 300px; background: linear-gradient(to top, rgba(238,244,251,0), rgba(238,244,251,.45) 55%, var(--paper)); }
 .final > * { position: relative; z-index: 3; }
 .final > .title--final { color: var(--navy); z-index: 5; }
-.stage--final { height: min(calc(100vw * 1380 / 720), calc(480px * 1380 / 720), calc(100svh - 250px)); margin: -10px auto 0; }
+.stage--final { height: min(calc(100vw * 1380 / 720), calc(480px * 1380 / 720), calc(var(--screen-h, 100svh) - 250px)); margin: -10px auto 0; }
 .plumbob--final { left: 0; top: 0; width: 9.5%; margin-left: -4.75%; will-change: transform; animation: none; }
 .countdown { display: flex; justify-content: center; gap: 10px; margin: 6px 0 0; }
 .countdown div { width: 70px; }
@@ -277,13 +279,13 @@ section { position: relative; }
 .wish__points span { display: block; font-size: 13px; font-weight: 600; color: #dbe8ff; }
 
 /* ---------- Появление при прокрутке ---------- */
-.reveal > * { transition: opacity 1.3s ease, transform 1.3s cubic-bezier(.2,.7,.2,1), filter 1.3s ease; }
+.reveal > * { transition: opacity 1.2s ease; }
 .reveal > :nth-child(2) { transition-delay: .12s; }
 .reveal > :nth-child(3) { transition-delay: .24s; }
 .reveal > :nth-child(4) { transition-delay: .36s; }
 .reveal > :nth-child(n+5) { transition-delay: .45s; }
-.reveal:not(.in) > * { opacity: 0; transform: translateY(46px) scale(.97); filter: blur(10px); }
-.reveal > .stage--final, .reveal:not(.in) > .stage--final { transform: none; filter: none; transition: opacity 1.3s ease; }
+.reveal:not(.in) > * { opacity: 0; }
+
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

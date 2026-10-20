@@ -1,14 +1,21 @@
-import { CONFIG } from './config.js?v=20261010184512';
-import { startLoader } from './loader.js?v=20261010184512';
-import { initMusic } from './music.js?v=20261010184512';
-import { playScene } from './scene.js?v=20261010184512';
-import { initRsvp } from './rsvp.js?v=20261010184512';
-import { initFinal } from './final.js?v=20261010184512';
-import { buildPlumbobs } from './plumbob.js?v=20261010184512';
+import { CONFIG } from './config.js?v=20261020153111';
+import { startLoader } from './loader.js?v=20261020153111';
+import { initMusic } from './music.js?v=20261020153111';
+import { playScene } from './scene.js?v=20261020153111';
+import { initRsvp } from './rsvp.js?v=20261020153111';
+import { initFinal } from './final.js?v=20261020153111';
+import { buildPlumbobs } from './plumbob.js?v=20261020153111';
 
 const $ = id => document.getElementById(id);
 
 buildPlumbobs();
+
+// Высота экрана замеряется один раз (и при повороте телефона): когда браузер прячет
+// или показывает свою панель, размеры роликов не меняются и страница не дёргается.
+let screenW = innerWidth;
+const setScreenH = () => document.documentElement.style.setProperty('--screen-h', `${innerHeight}px`);
+setScreenH();
+addEventListener('resize', () => { if (innerWidth !== screenW) { screenW = innerWidth; setScreenH(); } });
 
 // Тексты из конфига
 $('coverAge').textContent = CONFIG.age;
